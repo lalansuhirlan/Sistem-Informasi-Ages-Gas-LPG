@@ -1,0 +1,114 @@
+<div class="container-fluid">
+                    <div class="card shadow mb-4">
+                        <div class="card-body">       
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">
+                            Tambah Kategori
+                            </button>
+                            <hr>
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="example2" width="100%" cellspacing="0">
+                                   <thead>
+                                        <tr>
+                                            <th class="text-center" width="40">No</th>
+                                            <th>Nama </th>
+                                            <th>Tanggal Input</th>
+                                         
+                                            <th>Aksi</th>
+                                        </tr>
+                                        </thead> 
+                                    
+                                    <tbody>
+                                    <?php
+                                        
+                                        $no=0;
+                                        $query=mysqli_query($conn, "SELECT * FROM kategori ");
+                                        while ($row=mysqli_fetch_assoc($query)) {
+                                          $no++;
+                                        ?>
+                                        <tr>
+                                          <td><?php echo $no ?></td>
+                                          <td><?php echo $row['nama_kategori']; ?></td>
+                                          <td><?php echo $row['tgl_input'] ?></td>
+                                          <td>
+                                          <button type="button" class="btn btn-info" data-toggle="modal" 
+                                            data-target="#modal-edit<?php echo $row['id_kategori']?>">
+                                             Edit
+                                          </button>
+                                          <button type="button" class="btn btn-danger" data-toggle="modal"
+                                           data-target="#modal-hapus<?php echo $row['id_kategori']?>">
+                                             Delete
+                                           </button>
+                                          </td>
+                                        
+                                        </tr>
+                               
+                                        <div class="modal fade" id="modal-edit<?php echo $row['id_kategori']?>">
+                                            <div class="modal-dialog">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h4 class="modal-title">Edit Kategori</h4>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                <!-- form start -->
+                                                <form action="edit.php" method="post">
+                                                    <div class="card-body">
+                                                      <div class="form-group">
+                                                        <label for="exampleInputEmail1">Nama Kategori</label>
+                                                        <input type="hidden" name="id_kategori" value="<?php echo $row ['id_kategori']?>">
+                                                        <input type="text" class="form-control" name="nama_kategori" 
+                                                          placeholder="masukan Kategori" value="<?php echo $row['nama_kategori']?>">
+                                                      </div>
+                                                      <div class="form-group">
+                                                        <label for="exampleInputPassword1">Tanggal Input </label>
+                                                        <input type="date" class="form-control" name="tgl_input" 
+                                                          placeholder="Masukan Tanggal" value="<?php echo $row['tgl_input']?>">
+                                                      </div>
+                                                    </div>
+                                                    <!-- /.card-body -->
+
+                                                    <div class="card-footer">
+                                                      <button type="submit" class="btn btn-primary">Submit</button>
+                                                      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                  </form>
+                                                </div>
+                                                <!-- /.card -->
+     
+                                                <div class="modal fade" id="modal-hapus<?php echo $row['id_kategori']?>">
+                                            <div class="modal-dialog">
+                                              <div class="modal-content">
+                                                <div class="modal-header">
+                                                  <h4 class="modal-title">Hapus Edit Kategori</h4>
+                                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                <!-- form start -->
+                                                <form action="hapus.php" method="post">
+                                                    <div class="card-body">
+                                                      <div class="form-group">
+                                                        <label for="exampleInputEmail1">Apakah anda yakin akan menghapus Kategori?</label>
+                                                        <input type="hidden" name="id_kategori" value="<?php echo $row ['id_kategori']?>">
+                                                        <input type="text" class="form-control" name="nama_kategori" 
+                                                          placeholder="masukan Kategori" value="<?php echo $row['nama_kategori']?>" readonly>
+                                                      </div>
+                                                     
+                                                    <!-- /.card-body -->
+
+                                                    <div class="card-footer">
+                                                      <button type="submit" class="btn btn-primary">Submit</button>
+                                                      <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                                  </form>
+                                                </div>
+                                             </div>
+                                             </div>
+                                             </div>
+                                             </div>
+                                             </div>
+                                             </div>
+                                             </div>
+                                             </div>
+                                             </div>
